@@ -2,6 +2,7 @@ import streamlit as st
 from scipy.integrate import solve_ivp
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 st.set_page_config(
    page_title="Lotka Volterra model",
@@ -67,4 +68,15 @@ ax.grid()
 with c2:
     st.pyplot(fig)
 
+    df = pd.DataFrame(sol.y.T, index=t, columns=["Kořist", "Dravec"])
+    df.index.name="Čas"
+    csv = df.to_csv()
+
+    st.download_button(
+    "Stáhnout data",
+    csv,
+    "lotka-volterra.csv",
+    "text/csv",
+    key='download-csv'
+    )
 
