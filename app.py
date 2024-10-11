@@ -27,14 +27,16 @@ with c2:
     \frac{\mathrm dx}{\mathrm dt} = ax - bxy - hx\\[10px]
     \frac{\mathrm dy}{\mathrm dt} = -cy + dxy - hy
     $$
+
+    Do klasického Lotkova-Volterrova modelu jsou přidány členy  
     """
 
 c1,c2 = st.columns(2)
 
 with c1:
     tmax = st.number_input("Konec času", value=20)
-    xmax = st.number_input("Maximum populace kořisti", value =10)
-    ymax = st.number_input("Maximum populace dravce", value = 10)
+#    xmax = st.number_input("Maximum populace kořisti", value =10)
+#    ymax = st.number_input("Maximum populace dravce", value = 10)
 
     c01,c02 = st.columns(2)
     with c01:
@@ -66,19 +68,18 @@ sol = solve_ivp(
     t_eval=t
 )
 
-fig, ax = plt.subplots()
-plt.plot(t, sol.y.T)
-plt.xlabel('čas')
-plt.legend(['kořist', 'dravec'], shadow=True)
-plt.title('Lotkův-Volterrův model dravce a kořisti')
-ax.set(ylim=(0,np.max([xmax,ymax])))
-ax.grid()
+with c2:
+    subplots = st.toggle("Samostatné grafy")
+
+df = pd.DataFrame(sol.y.T, index=t, columns=["Kořist", "Dravec"])
+df.index.name="Čas"
+ax = df.plot(subplots=subplots)
+plt.suptitle('Lotkův-Volterrův model dravce a kořisti')
+plt.tight_layout()
 
 with c2:
-    st.pyplot(fig)
+    st.pyplot(plt.gcf())
 
-    df = pd.DataFrame(sol.y.T, index=t, columns=["Kořist", "Dravec"])
-    df.index.name="Čas"
     csv = df.to_csv()
 
     st.download_button(
