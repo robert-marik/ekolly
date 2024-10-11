@@ -4,6 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+# import logfire
+# logfire.configure()
+# logfire.info("The computation starts.")
+
 st.set_page_config(
    page_title="Lotka Volterra model",
    layout="wide",
@@ -21,15 +25,22 @@ with c1:
     "![Predators and prey](https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Iberian_Lynx_cubs_investigate_their_future_prey_%28European_rabbit%29.JPG/640px-Iberian_Lynx_cubs_investigate_their_future_prey_%28European_rabbit%29.JPG)"
 with c2:
     r"""
-    Lotkův-Volterrův model dravce a kořisti s lovem je soustava diferenciálních rovnic následujícího tvaru.
+    Lotkův-Volterrův model dravce a kořisti je model, který má ambice vysvětlit
+    dynamiku populace dravce a kořisti. Přesněji ,vysvětluje, proč v populacích
+    dravce a kořisti dochází k cyklickým fluktuacím. 
+
+    Do klasického modelu přidáme členy, které modelují lov. Toto je motivováno
+    snahou vysvětlit, proč se při omezení lovu zvýší procentuální zastoupení
+    predátorů. 
+    
+    Matematickým modelem je soustava diferenciálních rovnic následujícího tvaru.
 
     $$
     \frac{\mathrm dx}{\mathrm dt} = ax - bxy - hx\\[10px]
     \frac{\mathrm dy}{\mathrm dt} = -cy + dxy - hy
     $$
 
-    Do klasického Lotkova-Volterrova modelu jsou přidány členy  charakterizující
-    lov. Lov je zde modelován jako konstantní úsilí, které je nezávislé na populaci dravce a kořisti.
+    Lov je zde modelován jako lov s konstantním úsilím, které je nezávislé na populaci dravce a kořisti.
     """
 
 c1,c2 = st.columns(2)
@@ -91,3 +102,4 @@ with c2:
     key='download-csv'
     )
 
+# logfire.info("The computation finished!")
