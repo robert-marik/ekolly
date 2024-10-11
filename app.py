@@ -28,7 +28,8 @@ with c2:
     \frac{\mathrm dy}{\mathrm dt} = -cy + dxy - hy
     $$
 
-    Do klasického Lotkova-Volterrova modelu jsou přidány členy  
+    Do klasického Lotkova-Volterrova modelu jsou přidány členy  charakterizující
+    lov. Lov je zde modelován jako konstantní úsilí, které je nezávislé na populaci dravce a kořisti.
     """
 
 c1,c2 = st.columns(2)
