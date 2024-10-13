@@ -1,8 +1,11 @@
 import streamlit as st
 from scipy.integrate import solve_ivp
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
+import plotly
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+pd.options.plotting.backend = "plotly"
 
 # import logfire
 # logfire.configure()
@@ -85,12 +88,23 @@ with c2:
 
 df = pd.DataFrame(sol.y.T, index=t, columns=["Kořist", "Dravec"])
 df.index.name="Čas"
-ax = df.plot(subplots=subplots)
-plt.suptitle('Lotkův-Volterrův model dravce a kořisti')
-plt.tight_layout()
+
+if subplots:
+    fig = make_subplots(rows=2, cols=1)
+    fig.add_trace(go.Scatter(x=df.index, y=df["Kořist"], name="Kořist"), row=1, col=1)
+    fig.add_trace(go.Scatter(x=df.index, y=df["Dravec"], name="Dravec"), row=2, col=1)
+else:
+    fig = df.plot()
+
+fig.update_layout(#height=600, width=1400,
+    hovermode = "x unified",
+    legend_traceorder="normal", 
+    title_text="Časový vývoj velikosti populací",
+    )
+fig.update_traces(xaxis='x2')
 
 with c2:
-    st.pyplot(plt.gcf())
+    st.plotly_chart(fig)
 
     csv = df.to_csv()
 
