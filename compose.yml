@@ -1,0 +1,8 @@
+services:
+    ode-models:
+        network_mode: bridge
+        working_dir: /app
+        ports:
+            - 80:80
+        image: ode-models:latest
+        build: .
