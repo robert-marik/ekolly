@@ -1,4 +1,3 @@
-import modules.nav
 import streamlit as st
 from scipy.integrate import solve_ivp
 import numpy as np
@@ -6,18 +5,15 @@ import pandas as pd
 import plotly
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
+import modules.nav
+
+st.set_page_config(layout="wide")
+modules.nav.Navbar()
 pd.options.plotting.backend = "plotly"
 
 # import logfire
 # logfire.configure()
 # logfire.info("The computation starts.")
-
-st.set_page_config(
-   page_title="Lotka Volterra model",
-   layout="wide",
-)
-
-modules.nav.Navbar()
 
 
 
