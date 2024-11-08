@@ -12,21 +12,6 @@ pd.options.plotting.backend = "plotly"
 
 text = r"""
 
-Životní prostředí podléhá neustálým změnám, ať už vlivem činnosti člověka či
-vlivem jiných aspektů. V důsledku toho jsou některé živočišné či rostlinné druhy
-ohroženy, jiné vymírají a jiné se naopak začínají více a více prosazovat. K
-pochopení tohoto procesu může pomoci i *ostrovní ekologie*. 
-Z hlediska pevniny jsou totiž ostrovy relativně nestálá a
-neustále se vyvíjející společenstva, vysoce citlivá na vnější zásahy, na kterých
-je možno sledovat vývoj jednotlivých druhů, jejich stability, rozmanitosti a
-pod. Principy ostrovní ekologie se nevztahují pouze na ostrovy v zeměpisném
-slova smyslu. Jde o jakýkoliv habitat oddělený od okolí. Například vrcholky hor
-jsou ostrovy v moři stanovišť s menší nadmořskou výškou, parky jsou ostrovy
-zeleně v moři městské zástavby, lesy jsou ostrovy v zemědělsky využívané
-krajině, živočichové jsou ostrovy pro parazity na nich žijící a podobně.
-Ostrovní ekologie je tedy nedílnou součástí ekologie jako celku i u
-vnitrozemských států.
-
 R. H. Mac Arthur a E. O. Wilson představili v 60. letech 20. stol. 
 teorii dynamické rovnováhy počtu druhů na ostrově. Tato teorie získala veliký
 ohlas a oba vědce proslavila mezi ekology, protože vysvětlovala fenomény spojené
