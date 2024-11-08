@@ -2,7 +2,7 @@ import streamlit as st
 
 
 r"""
-# EKOLY (EKOlogické modeLY)
+# Ekologické modely
 
 * Tato stránka přesdtavuje některé ekologické modely, zkáceně "ekolly". (Neplést s bakteríí *E. Coli*.)
 * Najdete zde některé modely používané v populační ekologii. 
