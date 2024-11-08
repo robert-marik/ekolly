@@ -1,15 +1,10 @@
 import streamlit as st
-import modules.nav
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 import pandas as pd
 pd.options.plotting.backend = "plotly"
 
-st.set_page_config(
-   layout="wide",
-)
-modules.nav.Navbar()
 
 """
 # Model ostrovní biogeografie

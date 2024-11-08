@@ -5,10 +5,7 @@ import pandas as pd
 import plotly
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-import modules.nav
 
-st.set_page_config(layout="wide")
-modules.nav.Navbar()
 pd.options.plotting.backend = "plotly"
 
 # import logfire

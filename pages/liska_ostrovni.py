@@ -5,13 +5,10 @@ import pandas as pd
 from scipy.integrate import solve_ivp
 from matplotlib.offsetbox import (OffsetImage, AnnotationBbox)
 from matplotlib import colors
+import plotly.express as px
 
-st.set_page_config(layout="wide")
-
-import modules.nav
-modules.nav.Navbar()
-
-
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 """ 
 # Model lišky ostrovní
 """
@@ -49,10 +46,26 @@ kde $F$, $S$, $P$, a $E$ jsou velikosti populací lišek, skunků, prasat a orl�
 
 """
 
+"""
+---
+
+## Numerická simulace
+
+Hodnoty parametrů jsou převzaty z publikovaného modelu. Níže můžete měnit počáteční stavy.
+
+Tip: porovnejte situaci s prasaty a bez prasat, stáhněte počáteční stav u prasat na nulu.
+
+"""
+
 cc1,cc2 = st.columns(2)
 
 with cc1:
-    "Parametry"
+
+    "**Počáteční stavy**"
+    liska = st.slider("🦊Liška", 0.0, 1000.0, 500.0)
+    skunk = st.slider("🦨Skunk", 0.0, 1000.0, 250.0)
+    prase = st.slider("🐷Prase", 0.0, 100.0, 50.0)
+    orel = st.slider("🦅Orel", 0.0, 50.0, 10.0)
 
 def rovnice(t, X):
     # Podle Roemer, Donlan, Courchamp, Golden eagles, feral pigs and insular carnivores: How exotoc species turn native pre
@@ -80,30 +93,38 @@ def rovnice(t, X):
     dE = (lambda_f*mu_f*phi*F**2+lambda_s*mu_s*sigma*S**2+lambda_p*mu_p*P**2)*E/(phi*F+sigma*S+P) - nu*E
     return [dF,dS,dP,dE]
 
-pocatecni_podminky = [
-    [500,250,50,10],
-    [500,400,0,10]
-    ]
+pocatecni_podminka = [500,250,50,10]
+pocatecni_podminka = [liska, skunk, prase, orel]
 meze = [0,100]
 labels = ["liška","skunk","prase","orel"]
 t=np.linspace(*meze, 500)  # graf reseni
 
-reseni = [solve_ivp(
+reseni = solve_ivp(
                    rovnice,
                    meze,
                    pocatecni_podminka,
                    t_eval=t,
                    ).y
-          for pocatecni_podminka in pocatecni_podminky ]
-reseni = np.array(reseni)  # převod na array knihovny numpy
-a,b,c = reseni.shape       # zjištění rozměrů
-reseni = reseni.reshape(a*b,c)
+
 df = pd.DataFrame(
         reseni.T,
-        columns=pd.MultiIndex.from_product([["s prasaty","bez prasat"],labels],names=["scenar","populace"])
+        columns=labels
 )
 df.index = t
 df.index.name = "čas"
 
 with cc2:
-    st.dataframe(df)
+    "**Řešení modelu**"
+
+    fig = make_subplots(rows=4, cols=1, shared_xaxes=True)
+    for i,col in enumerate(labels):
+        fig.add_trace(
+            go.Scatter(x=t, y=df[col], name=col), row=i+1, col=1
+        )
+    fig.update_layout(height=500,
+        hovermode = "x unified",
+    )
+    fig.update_traces(xaxis='x')
+    # fig.update_traces(hoverinfo='name+y')
+
+    st.plotly_chart(fig, use_container_width=True)
