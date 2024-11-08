@@ -5,7 +5,7 @@ Lotkuv Volterruv model s lovem, streamlit aplikace
 
 ## Online version
 
-[https://lotka-volterra.streamlit.app/](https://lotka-volterra.streamlit.app/)
+[https://ekoly.streamlit.app/](https://lotka-volterra.streamlit.app/)
 
 
 ## Streamlit
@@ -14,8 +14,15 @@ Lotkuv Volterruv model s lovem, streamlit aplikace
 streamlit run app.py
 ~~~
 
+## Docker composet
 
-## Docker
+Build (pokud je potřeba) a spuštění
+~~~
+docker compose up
+~~~
+Nastavení čísla portu, na kterém aplikace poběží, je v souboru `compose.yml`.
+
+## Docker bez compose
 
 Build
 ~~~
